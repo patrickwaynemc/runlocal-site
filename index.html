@@ -1,0 +1,485 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RunLocal — Your Guide to Running for Local Office</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0d1b2e;
+    --blue:#1d4ed8;
+    --gold:#e8a33d;
+    --coral:#ff5a4e;
+    --yellow:#a91d1d;
+    --cream:#fdf6ec;
+    --gray:#5b6472;
+    --white:#ffffff;
+    --radius:24px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Poppins','Segoe UI',system-ui,-apple-system,sans-serif;color:var(--navy);background:var(--cream);line-height:1.6;}
+  a{text-decoration:none;color:inherit;}
+  .container{max-width:1140px;margin:0 auto;padding:0 24px;}
+
+  header{position:sticky;top:0;background:var(--navy);box-shadow:0 2px 14px rgba(0,0,0,0.15);z-index:100;}
+  nav{display:flex;justify-content:space-between;align-items:center;padding:14px 24px;max-width:1140px;margin:0 auto;}
+  .logo{font-size:1.6rem;font-weight:900;color:#fff;display:flex;align-items:center;gap:8px;letter-spacing:-0.5px;}
+  .logo span{color:var(--yellow);}
+  nav ul{display:flex;gap:10px;list-style:none;align-items:center;}
+  nav ul li a{font-weight:800;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.5px;color:#fff;background:rgba(255,255,255,0.08);padding:10px 18px;border-radius:999px;transition:background .2s, color .2s;}
+  nav ul li a:hover{background:var(--coral);color:#fff;}
+  .nav-cta{background:var(--yellow) !important;color:#fff !important;padding:10px 22px !important;border-radius:999px;font-weight:900 !important;}
+  .nav-cta:hover{background:var(--coral) !important;color:#fff !important;}
+  .menu-toggle{display:none;font-size:1.6rem;background:none;border:none;cursor:pointer;color:#fff;}
+
+  .hero{background:linear-gradient(135deg,var(--navy) 0%,#1a2f4d 100%);color:#fff;padding:110px 0 90px;text-align:center;position:relative;overflow:hidden;}
+  .hero::before{content:'';position:absolute;top:-60px;right:-60px;width:220px;height:220px;background:var(--coral);border-radius:50%;opacity:0.25;}
+  .hero::after{content:'';position:absolute;bottom:-80px;left:-60px;width:260px;height:260px;background:var(--yellow);border-radius:50%;opacity:0.15;}
+  .hero h1{font-size:3.4rem;font-weight:900;margin-bottom:20px;line-height:1.15;letter-spacing:-1px;position:relative;}
+  .hero h1 span{color:var(--yellow);}
+  .hero p{font-size:1.2rem;max-width:640px;margin:0 auto 36px;color:#dbe4f0;position:relative;}
+  .hero-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;position:relative;}
+  .btn{display:inline-block;padding:16px 34px;border-radius:999px;font-weight:800;font-size:1rem;cursor:pointer;border:none;transition:transform .15s, box-shadow .15s;text-transform:uppercase;letter-spacing:0.5px;}
+  .btn-primary{background:var(--coral);color:#fff;}
+  .btn-primary:hover{transform:translateY(-3px) scale(1.03);box-shadow:0 10px 24px rgba(255,90,78,0.45);}
+  .btn-outline{background:transparent;color:#fff;border:2px solid rgba(255,255,255,0.6);}
+  .btn-outline:hover{background:rgba(255,255,255,0.12);transform:translateY(-3px);}
+
+  .stats{display:flex;justify-content:center;gap:60px;margin-top:56px;flex-wrap:wrap;position:relative;}
+  .stat h3{font-size:2.2rem;color:var(--yellow);font-weight:900;}
+  .stat p{font-size:0.9rem;color:#c8d4e5;text-transform:uppercase;letter-spacing:0.5px;}
+
+  section{padding:90px 0;}
+  .section-title{text-align:center;margin-bottom:50px;}
+  .section-title h2{font-size:2.4rem;font-weight:900;color:var(--navy);margin-bottom:12px;letter-spacing:-0.5px;}
+  .section-title p{color:var(--gray);max-width:600px;margin:0 auto;font-size:1.08rem;}
+
+  .why-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:28px;}
+  .why-card{background:#fff;border-radius:var(--radius);padding:32px 26px;box-shadow:0 4px 16px rgba(15,37,64,0.06);text-align:center;transition:transform .2s;}
+  .why-card:hover{transform:translateY(-6px) rotate(-1deg);border-bottom:5px solid var(--coral);}
+  .why-card .icon{font-size:2.4rem;margin-bottom:16px;}
+  .why-card h3{font-size:1.15rem;margin-bottom:10px;font-weight:700;}
+  .why-card p{color:var(--gray);font-size:0.95rem;}
+
+  .steps{background:#fff;}
+  .timeline{position:relative;max-width:780px;margin:0 auto;}
+  .timeline::before{content:'';position:absolute;left:28px;top:0;bottom:0;width:3px;background:linear-gradient(var(--blue),var(--gold));}
+  .step{position:relative;padding-left:76px;margin-bottom:44px;}
+  .step:last-child{margin-bottom:0;}
+  .step-num{position:absolute;left:0;top:0;width:58px;height:58px;background:var(--coral);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:1.3rem;border:4px solid var(--cream);box-shadow:0 4px 12px rgba(255,90,78,0.35);}
+  .step h3{font-size:1.25rem;margin-bottom:8px;font-weight:700;color:var(--navy);}
+  .step p{color:var(--gray);}
+  .step ul{margin:12px 0 0 20px;color:var(--gray);}
+  .step ul li{margin-bottom:4px;}
+
+  .offices{background:linear-gradient(135deg,#0f2540,#173a63);color:#fff;}
+  .offices .section-title h2{color:#fff;}
+  .offices .section-title p{color:#c8d4e5;}
+  .office-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;}
+  .office-card{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.18);border-radius:var(--radius);padding:26px;transition:transform .2s, background .2s;}
+  .office-card:hover{transform:translateY(-4px);background:rgba(255,255,255,0.14);}
+  .office-card h4{color:var(--gold);margin-bottom:8px;}
+  .office-card p{color:#dbe4f0;font-size:0.92rem;}
+
+  .faq-item{background:#fff;border-radius:16px;margin-bottom:14px;box-shadow:0 2px 10px rgba(15,37,64,0.06);overflow:hidden;}
+  .faq-q{padding:20px 24px;font-weight:700;cursor:pointer;display:flex;justify-content:space-between;align-items:center;}
+  .faq-q::after{content:'+';font-size:1.4rem;color:var(--blue);transition:transform .2s;}
+  .faq-item.open .faq-q::after{transform:rotate(45deg);}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease;padding:0 24px;color:var(--gray);}
+  .faq-item.open .faq-a{max-height:300px;padding-bottom:20px;}
+
+  .cta-final{background:linear-gradient(120deg,var(--yellow),#7a1414);text-align:center;color:#fff;position:relative;overflow:hidden;}
+  .cta-final h2{font-size:2rem;font-weight:800;margin-bottom:14px;color:#fff;}
+  .cta-final p{margin-bottom:30px;font-size:1.05rem;color:#f4d9d9;}
+  .cta-final .btn-primary{background:#fff;color:var(--yellow);}
+  .cta-final .btn-primary:hover{background:var(--navy);color:#fff;}
+  .form-row{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;}
+  .form-row input{padding:14px 20px;border-radius:999px;border:none;width:300px;max-width:80vw;font-size:1rem;}
+  .form-msg{margin-top:16px;font-weight:700;display:none;}
+
+  footer{background:var(--navy);color:#c8d4e5;padding:50px 0 24px;}
+  .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:40px;margin-bottom:30px;}
+  .footer-grid h4{color:#fff;margin-bottom:14px;}
+  .footer-grid ul{list-style:none;}
+  .footer-grid ul li{margin-bottom:8px;}
+  .footer-grid ul li a:hover{color:var(--gold);}
+  .footer-bottom{text-align:center;padding-top:24px;border-top:1px solid rgba(255,255,255,0.1);font-size:0.85rem;color:#8a99b3;}
+
+  @media (max-width:768px){
+    nav ul{display:none;}
+    .menu-toggle{display:block;}
+    .hero h1{font-size:2.1rem;}
+    .footer-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="logo">Run<span>Local</span></div>
+    <ul>
+      <li><a href="#why">Why Run</a></li>
+      <li><a href="#steps">Get Started</a></li>
+      <li><a href="#offices">Offices</a></li>
+      <li><a href="#lookup">Deadlines</a></li>
+      <li><a href="#campaign-tools">Campaign Tools</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <button class="menu-toggle" onclick="document.querySelector('nav ul').classList.toggle('mobile-show')">☰</button>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="container">
+    <h1>Local government needs <span>people like you.</span></h1>
+    <p>A clear, step-by-step guide to running for local office — school board, city council, county commission, and more. No political science degree required.</p>
+    <div class="hero-btns">
+      <a href="#steps" class="btn btn-primary">Start the Roadmap</a>
+      <a href="#offices" class="btn btn-outline">Explore Offices</a>
+    </div>
+    <div class="stats">
+      <div class="stat"><h3>519,000+</h3><p>Elected local offices in the U.S.</p></div>
+      <div class="stat"><h3>7</h3><p>Steps to file your candidacy</p></div>
+      <div class="stat"><h3>0</h3><p>Cost to start learning</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="why">
+  <div class="container">
+    <div class="section-title">
+      <h2>Why run for local office?</h2>
+      <p>Local offices shape schools, roads, budgets, and public safety — decisions that touch daily life more than almost anything in Washington.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="icon">🏫</div>
+        <h3>Real, Local Impact</h3>
+        <p>Change is faster and more visible in your own community than at the federal level.</p>
+      </div>
+      <div class="why-card">
+        <div class="icon">🌱</div>
+        <h3>A Lower Barrier to Entry</h3>
+        <p>Most local races have small budgets, short ballots, and no career-politician gatekeepers.</p>
+      </div>
+      <div class="why-card">
+        <div class="icon">🤝</div>
+        <h3>Builds Future Leaders</h3>
+        <p>Local office is where most state and national leaders got their start.</p>
+      </div>
+      <div class="why-card">
+        <div class="icon">📣</div>
+        <h3>Underrepresented Voices Needed</h3>
+        <p>Many local seats go uncontested each cycle — your candidacy could be the only choice voters get.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="steps" class="steps">
+  <div class="container">
+    <div class="section-title">
+      <h2>Your roadmap to running</h2>
+      <p>Every state's rules differ slightly, but nearly every local candidacy follows this path.</p>
+    </div>
+    <div class="timeline">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>Pick your office &amp; check eligibility</h3>
+        <p>Confirm residency, age, and citizenship requirements for the seat with your county/city clerk or Secretary of State site.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>Research the seat</h3>
+        <ul>
+          <li>Term length &amp; election calendar</li>
+          <li>Current officeholder &amp; past vote totals</li>
+          <li>Filing deadline &amp; signature requirements</li>
+        </ul>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>File your candidacy</h3>
+        <p>Submit your declaration of candidacy, pay any filing fee or gather the required nominating signatures with your local election office.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <h3>Build your team &amp; message</h3>
+        <p>Recruit a treasurer and a few volunteers. Write a simple platform: 3 issues you genuinely care about and can act on locally.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">5</div>
+        <h3>Set up campaign finance</h3>
+        <p>Open a campaign bank account, register with your local election/finance board, and track every dollar from day one.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">6</div>
+        <h3>Get in front of voters</h3>
+        <p>Door-knock, attend community meetings, show up at candidate forums, and use low-cost local social media and yard signs.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">7</div>
+        <h3>Get out the vote</h3>
+        <p>In the final weeks, focus entirely on turning out your identified supporters — local races are often decided by a handful of votes.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="offices" class="offices">
+  <div class="container">
+    <div class="section-title">
+      <h2>Which office is right for you?</h2>
+      <p>Local government has more entry points than people realize.</p>
+    </div>
+    <div class="office-grid">
+      <div class="office-card"><h4>School Board</h4><p>Curriculum, budgets, and school policy. Often nonpartisan with low signature thresholds.</p></div>
+      <div class="office-card"><h4>City / Town Council</h4><p>Zoning, local ordinances, budgets, and public services for your municipality.</p></div>
+      <div class="office-card"><h4>County Commission</h4><p>Roads, public health, parks, and county-level budgeting decisions.</p></div>
+      <div class="office-card"><h4>Mayor</h4><p>Executive leadership for a city or town — higher visibility, higher stakes.</p></div>
+      <div class="office-card"><h4>Library / Park District Board</h4><p>Smaller, often overlooked boards that are a great first step into public service.</p></div>
+      <div class="office-card"><h4>Judge / Clerk / Sheriff</h4><p>Many states elect these roles locally — check your state's specific requirements.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="lookup" style="background:#fff;">
+  <div class="container">
+    <div class="section-title">
+      <h2>Find your filing deadline</h2>
+      <p>Select your state and the type of office you're considering. We'll point you straight to the official source for exact dates — filing deadlines change every cycle, so we always link you to the authoritative page rather than guess.</p>
+    </div>
+    <div style="max-width:700px;margin:0 auto;background:var(--cream);border-radius:var(--radius);padding:36px;box-shadow:0 4px 16px rgba(15,37,64,0.06);">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px;">
+        <div>
+          <label style="display:block;font-weight:700;margin-bottom:8px;font-size:0.9rem;">State</label>
+          <select id="stateSelect" style="width:100%;padding:12px 14px;border-radius:8px;border:1px solid #d7dde6;font-size:1rem;">
+            <option value="">Select a state...</option>
+          </select>
+        </div>
+        <div>
+          <label style="display:block;font-weight:700;margin-bottom:8px;font-size:0.9rem;">Office type</label>
+          <select id="officeSelect" style="width:100%;padding:12px 14px;border-radius:8px;border:1px solid #d7dde6;font-size:1rem;">
+            <option value="school">School Board</option>
+            <option value="council">City / Town Council</option>
+            <option value="county">County Commission</option>
+            <option value="mayor">Mayor</option>
+            <option value="other">Other Local Office</option>
+          </select>
+        </div>
+      </div>
+      <button class="btn btn-primary" style="width:100%;border:none;" onclick="lookupDeadline()">Find My Filing Info</button>
+      <a href="candidate_filing_checklist_1783959454.pdf" download style="display:block;text-align:center;margin-top:14px;font-weight:700;color:var(--blue);">&#8681; Download the Candidate Filing Checklist (PDF)</a>
+      <div id="lookupResult" style="margin-top:24px;display:none;">
+        <div style="background:#fff;border-left:4px solid var(--blue);border-radius:8px;padding:20px 22px;">
+          <h4 id="resultState" style="margin-bottom:8px;color:var(--navy);"></h4>
+          <p id="resultOffice" style="color:var(--gray);margin-bottom:14px;font-size:0.92rem;"></p>
+          <p style="margin-bottom:14px;font-size:0.92rem;color:var(--gray);">Filing deadlines, forms, and requirements are set and updated by your state and county/city election offices. Use these official links to get exact, current-cycle dates:</p>
+          <div id="resultLinks" style="display:flex;flex-direction:column;gap:8px;"></div>
+          <p style="margin-top:14px;font-size:0.85rem;color:#8a99b3;">Tip: for school board, city council, and county races, also call your local county/city clerk directly — many local deadlines aren't listed on the state site.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="container">
+    <div class="section-title">
+      <h2>Frequently asked questions</h2>
+    </div>
+    <div style="max-width:760px;margin:0 auto;">
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Do I need a political background to run?</div>
+        <div class="faq-a"><p>No. Most local candidates are teachers, small business owners, parents, and neighbors. Genuine care about your community matters more than experience.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">How much does it cost to run?</div>
+        <div class="faq-a"><p>Many local races can be run on a few hundred to a few thousand dollars — often just filing fees, yard signs, and printing costs.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">How do I find my filing deadline?</div>
+        <div class="faq-a"><p>Check your Secretary of State's elections page or call your county/city clerk's office directly — deadlines vary widely by state and office.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Can I run without a political party?</div>
+        <div class="faq-a"><p>Yes. Many local offices are officially nonpartisan, and independent candidates can run in most jurisdictions with enough signatures.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">What's the single most important first step?</div>
+        <div class="faq-a"><p>Call your local election/clerk office and ask for the candidate filing packet for your specific office — it answers 90% of logistical questions.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-final" id="campaign-tools">
+  <div class="container">
+    <h2>Ready to build your campaign?</h2>
+    <p>Once you've filed, you'll need a campaign website and a way to accept donations. ActBlue's Website Builder is a popular tool built specifically for political candidates — combining a campaign site with built-in fundraising.</p>
+    <a href="https://www.actblue.com/products/website-builder/" target="_blank" rel="noopener" class="btn btn-primary">Explore ActBlue Website Builder &rarr;</a>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="logo" style="color:#fff;">Run<span>Local</span></div>
+        <p style="margin-top:12px;color:#a9b7cc;max-width:320px;">A free, nonpartisan resource helping everyday people learn how to run for local office and win.</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="#why">Why Run</a></li>
+          <li><a href="#steps">Roadmap</a></li>
+          <li><a href="#offices">Office Types</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Get Started</h4>
+        <ul>
+          <li><a href="#lookup">Filing Deadlines</a></li>
+          <li><a href="#campaign-tools">Campaign Website &amp; Fundraising</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2026 RunLocal. This is an independent, nonpartisan educational resource. Not affiliated with any government agency.
+    </div>
+  </div>
+</footer>
+
+<script>
+  const STATES = {
+    "Alabama":"https://www.sos.alabama.gov/alabama-votes",
+    "Alaska":"https://www.elections.alaska.gov/",
+    "Arizona":"https://azsos.gov/elections",
+    "Arkansas":"https://www.sos.arkansas.gov/elections",
+    "California":"https://www.sos.ca.gov/elections",
+    "Colorado":"https://www.sos.state.co.us/pubs/elections/main.html",
+    "Connecticut":"https://portal.ct.gov/sots/election-services",
+    "Delaware":"https://elections.delaware.gov/",
+    "Florida":"https://dos.myflorida.com/elections/",
+    "Georgia":"https://sos.ga.gov/elections-division-georgia-secretary-states-office",
+    "Hawaii":"https://elections.hawaii.gov/",
+    "Idaho":"https://sos.idaho.gov/elections-division/",
+    "Illinois":"https://www.elections.il.gov/",
+    "Indiana":"https://www.in.gov/sos/elections/",
+    "Iowa":"https://sos.iowa.gov/elections/",
+    "Kansas":"https://sos.ks.gov/elections/elections.html",
+    "Kentucky":"https://elect.ky.gov/",
+    "Louisiana":"https://www.sos.la.gov/ElectionsAndVoting/Pages/default.aspx",
+    "Maine":"https://www.maine.gov/sos/cec/elec/",
+    "Maryland":"https://elections.maryland.gov/",
+    "Massachusetts":"https://www.sec.state.ma.us/ele/eleidx.htm",
+    "Michigan":"https://www.michigan.gov/sos/elections",
+    "Minnesota":"https://www.sos.state.mn.us/elections-voting/",
+    "Mississippi":"https://www.sos.ms.gov/elections-voting",
+    "Missouri":"https://www.sos.mo.gov/elections",
+    "Montana":"https://sosmt.gov/elections/",
+    "Nebraska":"https://sos.nebraska.gov/elections",
+    "Nevada":"https://www.nvsos.gov/sos/elections",
+    "New Hampshire":"https://www.sos.nh.gov/elections",
+    "New Jersey":"https://www.nj.gov/state/elections/",
+    "New Mexico":"https://www.sos.nm.gov/voting-and-elections/",
+    "New York":"https://www.elections.ny.gov/",
+    "North Carolina":"https://www.ncsbe.gov/",
+    "North Dakota":"https://vip.sos.nd.gov/",
+    "Ohio":"https://www.ohiosos.gov/elections/",
+    "Oklahoma":"https://oklahoma.gov/elections.html",
+    "Oregon":"https://sos.oregon.gov/elections/",
+    "Pennsylvania":"https://www.pa.gov/agencies/vote.html",
+    "Rhode Island":"https://vote.sos.ri.gov/",
+    "South Carolina":"https://scvotes.gov/",
+    "South Dakota":"https://sdsos.gov/elections-voting/",
+    "Tennessee":"https://sos.tn.gov/elections",
+    "Texas":"https://www.sos.state.tx.us/elections/",
+    "Utah":"https://vote.utah.gov/",
+    "Vermont":"https://sos.vermont.gov/elections/",
+    "Virginia":"https://www.elections.virginia.gov/",
+    "Washington":"https://www.sos.wa.gov/elections/",
+    "West Virginia":"https://sos.wv.gov/elections/",
+    "Wisconsin":"https://elections.wi.gov/",
+    "Wyoming":"https://sos.wyo.gov/Elections/"
+  };
+
+  const OFFICE_LABELS = {
+    school: "School Board",
+    council: "City / Town Council",
+    county: "County Commission",
+    mayor: "Mayor",
+    other: "Other Local Office"
+  };
+
+  const OFFICE_TIPS = {
+    school: "School board filings are usually handled by your county election office or the school district clerk — not always the state site.",
+    council: "City/town council filing is typically managed by your municipal or city clerk's office.",
+    county: "County commission races are filed through your county clerk or county election board.",
+    mayor: "Mayoral filing requirements are set by your city charter — check with your city clerk in addition to the state site.",
+    other: "Requirements vary widely by office — your county or city clerk is the best first call."
+  };
+
+  function populateStates(){
+    const sel = document.getElementById('stateSelect');
+    Object.keys(STATES).sort().forEach(name => {
+      const opt = document.createElement('option');
+      opt.value = name;
+      opt.textContent = name;
+      sel.appendChild(opt);
+    });
+  }
+  populateStates();
+
+  function lookupDeadline(){
+    const state = document.getElementById('stateSelect').value;
+    const office = document.getElementById('officeSelect').value;
+    if(!state){
+      alert('Please select a state first.');
+      return;
+    }
+    document.getElementById('resultState').textContent = state + ' — ' + OFFICE_LABELS[office];
+    document.getElementById('resultOffice').textContent = OFFICE_TIPS[office];
+    const linksDiv = document.getElementById('resultLinks');
+    linksDiv.innerHTML = '';
+    const stateLink = document.createElement('a');
+    stateLink.href = STATES[state];
+    stateLink.target = '_blank';
+    stateLink.rel = 'noopener';
+    stateLink.style = 'color:var(--blue);font-weight:700;';
+    stateLink.textContent = '→ ' + state + ' Secretary of State / Elections Office';
+    linksDiv.appendChild(stateLink);
+
+    const ballotpedia = document.createElement('a');
+    ballotpedia.href = 'https://ballotpedia.org/' + encodeURIComponent(state.replace(/ /g,'_'));
+    ballotpedia.target = '_blank';
+    ballotpedia.rel = 'noopener';
+    ballotpedia.style = 'color:var(--blue);font-weight:700;';
+    ballotpedia.textContent = '→ Ballotpedia: ' + state + ' Elections';
+    linksDiv.appendChild(ballotpedia);
+
+    const stateSlug = state.toLowerCase().replace(/ /g,'-');
+    const statePage = document.createElement('a');
+    statePage.href = 'states/' + stateSlug + '.html';
+    statePage.style = 'color:var(--coral);font-weight:800;';
+    statePage.textContent = '→ View the Full ' + state + ' Local Office Guide';
+    linksDiv.appendChild(statePage);
+
+    document.getElementById('lookupResult').style.display = 'block';
+    document.getElementById('lookupResult').scrollIntoView({behavior:'smooth', block:'nearest'});
+  }
+
+  function toggleFaq(el){
+    const item = el.parentElement;
+    document.querySelectorAll('.faq-item').forEach(f => { if(f !== item) f.classList.remove('open'); });
+    item.classList.toggle('open');
+  }
+</script>
+
+</body>
+</html>
